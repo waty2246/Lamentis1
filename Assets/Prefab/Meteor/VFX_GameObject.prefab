@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db49caede6f8e9e40ba5a0055c68e08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 0.3
   m_target: {x: 0, y: 0, z: 0}
   m_bigExplosionPrefab: {fileID: 0}
   m_targetCirclePrefab: {fileID: 0}
@@ -1026,8 +1026,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 50
-      minScalar: 40
+      scalar: 40
+      minScalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:

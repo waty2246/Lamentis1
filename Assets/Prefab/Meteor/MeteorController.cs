@@ -14,11 +14,18 @@ public class MeteorController : MonoBehaviour
 
     private GameObject m_targetCircle;
 
+    private Vector3 m_direction;
+
+    private Rigidbody m_rigidbody;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        m_direction = m_target - transform.position;
+        m_rigidbody = GetComponent<Rigidbody>();
         transform.LookAt(m_target);
+
         Quaternion rot = Quaternion.AngleAxis(90.0f, new Vector3(1.0f, 0.0f, 0.0f));
         m_targetCircle = Instantiate(m_targetCirclePrefab, m_target + new Vector3(0.0f, 0.1f, 0.0f), rot);
 
@@ -29,12 +36,9 @@ public class MeteorController : MonoBehaviour
     {
         if (speed != 0)
         {
-            //rb.position += transform.forward * (speed * Time.deltaTime);
+            m_rigidbody.velocity = m_direction * speed;
 
-            //transform.position = Vector3.Lerp(transform.position, meteorGround.transform.position, 0.025f);
-
-            transform.position = Vector3.MoveTowards(transform.position, m_target, speed * Time.deltaTime);
-            if (transform.position == m_target)
+            if (transform.position.y < -1.0f)
             {
                 Explosion();
             }
@@ -45,7 +49,7 @@ public class MeteorController : MonoBehaviour
     {
         PoolManager.Kill(gameObject);
         GameObject explosion = Instantiate(m_bigExplosionPrefab, m_target, Quaternion.identity);
-        Destroy(explosion, 3);
+        Destroy(explosion, 2);
         Destroy(m_targetCircle);
     }
 
@@ -60,8 +64,12 @@ public class MeteorController : MonoBehaviour
 
             PoolManager.Kill(gameObject);
             GameObject explosion = Instantiate(m_bigExplosionPrefab, pos, rot);
-            Destroy(explosion, 3);
+            Destroy(explosion, 2);
             Destroy(m_targetCircle);
+        }
+        else
+        {
+            Physics.IgnoreCollision(gameObject.GetComponentInChildren<SphereCollider>(), collision.collider, true);
         }
     }
 }
