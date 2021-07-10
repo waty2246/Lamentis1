@@ -432,11 +432,11 @@ PrefabInstance:
       objectReference: {fileID: 1639263624}
     - target: {fileID: 3333724189024924827, guid: 5a335bf02933284478897c18d8f5ebbd, type: 3}
       propertyPath: m_CountSpawn
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3333724189024924827, guid: 5a335bf02933284478897c18d8f5ebbd, type: 3}
       propertyPath: m_RadiusSpawn
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3333724189024924828, guid: 5a335bf02933284478897c18d8f5ebbd, type: 3}
       propertyPath: m_RootOrder

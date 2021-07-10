@@ -40,15 +40,15 @@ public class MeteorController : MonoBehaviour
 
             if (transform.position.y < -1.0f)
             {
-                Explosion();
+                Explosion(m_target);
             }
         }
     }
 
-    void Explosion()
+    void Explosion(Vector3 pos)
     {
         PoolManager.Kill(gameObject);
-        GameObject explosion = Instantiate(m_bigExplosionPrefab, m_target, Quaternion.identity);
+        GameObject explosion = Instantiate(m_bigExplosionPrefab, pos, Quaternion.identity);
         Destroy(explosion, 2);
         Destroy(m_targetCircle);
     }
@@ -59,13 +59,8 @@ public class MeteorController : MonoBehaviour
         if (!objCollision.CompareTag("Meteor"))
         {
             ContactPoint contact = collision.contacts[0];
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
             Vector3 pos = contact.point;
-
-            PoolManager.Kill(gameObject);
-            GameObject explosion = Instantiate(m_bigExplosionPrefab, pos, rot);
-            Destroy(explosion, 2);
-            Destroy(m_targetCircle);
+            Explosion(pos);
         }
         else
         {
